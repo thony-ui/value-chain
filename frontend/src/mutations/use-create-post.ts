@@ -16,6 +16,7 @@ export function useCreatePost() {
       queryClient.invalidateQueries({ queryKey: ["post-chain"] });
       queryClient.invalidateQueries({ queryKey: ["post-descendants"] });
       queryClient.invalidateQueries({ queryKey: ["post"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
 }
@@ -31,6 +32,7 @@ export function useRepost() {
       queryClient.invalidateQueries({ queryKey: ["post-chain"] });
       queryClient.invalidateQueries({ queryKey: ["post-descendants"] });
       queryClient.invalidateQueries({ queryKey: ["post"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
 }

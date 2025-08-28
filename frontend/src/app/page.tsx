@@ -46,73 +46,63 @@ export default function Home() {
         <PostCreator />
 
         {/* Filtered Posts */}
-        {posts
-          ?.filter(
-            (post) =>
-              post.id === "9dd493b6-0ea6-4e9d-9aa4-faa656f442b6" ||
-              post.id === "b758b8b7-40b1-4530-a5e5-81798812abe2"
-          )
-          .map((post) => {
-            const activeView = activeViews[post.id] || "details";
-            return (
-              <div key={post.id} className="space-y-8">
-                {/* Post Title and View Selector */}
-                <Card className="p-6 bg-white/10 backdrop-blur-sm border border-purple-300/20 rounded-2xl shadow-xl">
-                  <div className="text-center mb-4">
-                    <h2 className="text-3xl font-bold text-purple-200">
-                      Post: {post.id.slice(0, 8)}
-                    </h2>
-                  </div>
-                  <div className="flex justify-center gap-4">
-                    <Button
-                      variant={activeView === "details" ? "default" : "outline"}
-                      onClick={() => setActiveView(post.id, "details")}
-                      className={`px-6 py-2 rounded-xl font-semibold transition-all ${
-                        activeView === "details"
-                          ? "bg-purple-500 text-white shadow-lg"
-                          : "bg-white/20 text-purple-200 border-purple-400 hover:bg-purple-400 hover:text-white"
-                      }`}
-                    >
-                      📄 Details
-                    </Button>
-                    <Button
-                      variant={activeView === "chain" ? "default" : "outline"}
-                      onClick={() => setActiveView(post.id, "chain")}
-                      className={`px-6 py-2 rounded-xl font-semibold transition-all ${
-                        activeView === "chain"
-                          ? "bg-teal-500 text-white shadow-lg"
-                          : "bg-white/20 text-teal-200 border-teal-400 hover:bg-teal-400 hover:text-white"
-                      }`}
-                    >
-                      🔗 Chain
-                    </Button>
-                    <Button
-                      variant={activeView === "tree" ? "default" : "outline"}
-                      onClick={() => setActiveView(post.id, "tree")}
-                      className={`px-6 py-2 rounded-xl font-semibold transition-all ${
-                        activeView === "tree"
-                          ? "bg-blue-500 text-white shadow-lg"
-                          : "bg-white/20 text-blue-200 border-blue-400 hover:bg-blue-400 hover:text-white"
-                      }`}
-                    >
-                      🌳 Tree
-                    </Button>
-                  </div>
-                </Card>
-
-                {/* Conditional Viewer */}
-                <div className="transition-opacity duration-300">
-                  {activeView === "details" && <PostViewer postId={post.id} />}
-                  {activeView === "chain" && (
-                    <PostChainViewer postId={post.id} />
-                  )}
-                  {activeView === "tree" && (
-                    <PostsTreeViewer postId={post.id} />
-                  )}
+        {posts?.map((post) => {
+          const activeView = activeViews[post.id] || "details";
+          return (
+            <div key={post.id} className="space-y-8">
+              {/* Post Title and View Selector */}
+              <Card className="p-6 bg-white/10 backdrop-blur-sm border border-purple-300/20 rounded-2xl shadow-xl">
+                <div className="text-center mb-4">
+                  <h2 className="text-3xl font-bold text-purple-200">
+                    Post: {post.id.slice(0, 8)}
+                  </h2>
                 </div>
+                <div className="flex justify-center gap-4">
+                  <Button
+                    variant={activeView === "details" ? "default" : "outline"}
+                    onClick={() => setActiveView(post.id, "details")}
+                    className={`px-6 py-2 rounded-xl font-semibold transition-all ${
+                      activeView === "details"
+                        ? "bg-purple-500 text-white shadow-lg"
+                        : "bg-white/20 text-purple-200 border-purple-400 hover:bg-purple-400 hover:text-white"
+                    }`}
+                  >
+                    📄 Details
+                  </Button>
+                  <Button
+                    variant={activeView === "chain" ? "default" : "outline"}
+                    onClick={() => setActiveView(post.id, "chain")}
+                    className={`px-6 py-2 rounded-xl font-semibold transition-all ${
+                      activeView === "chain"
+                        ? "bg-teal-500 text-white shadow-lg"
+                        : "bg-white/20 text-teal-200 border-teal-400 hover:bg-teal-400 hover:text-white"
+                    }`}
+                  >
+                    🔗 Chain
+                  </Button>
+                  <Button
+                    variant={activeView === "tree" ? "default" : "outline"}
+                    onClick={() => setActiveView(post.id, "tree")}
+                    className={`px-6 py-2 rounded-xl font-semibold transition-all ${
+                      activeView === "tree"
+                        ? "bg-blue-500 text-white shadow-lg"
+                        : "bg-white/20 text-blue-200 border-blue-400 hover:bg-blue-400 hover:text-white"
+                    }`}
+                  >
+                    🌳 Tree
+                  </Button>
+                </div>
+              </Card>
+
+              {/* Conditional Viewer */}
+              <div className="transition-opacity duration-300">
+                {activeView === "details" && <PostViewer postId={post.id} />}
+                {activeView === "chain" && <PostChainViewer postId={post.id} />}
+                {activeView === "tree" && <PostsTreeViewer postId={post.id} />}
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
 
         {/* Footer */}
         <div className="text-center mt-16 text-purple-300 bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-purple-300/20">
